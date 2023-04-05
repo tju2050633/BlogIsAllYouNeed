@@ -32,13 +32,13 @@
 
    系统会返回一个包含所有screen会话的列表。
 
-​	注意：在使用screen命令时，如果你需要退出ssh连接，则不要直接使用Ctrl+C或者关闭终端窗口，而是应该使用以下命令：
+6. 退出screen会话
 
-```
-screen -X -S session_name quit
-```
+   ```
+   screen -S session_name -X quit
+   ```
 
-其中session_name是你需要退出的screen会话的名称。这样可以避免screen会话中正在运行的程序被终止。
+   
 
 
 
