@@ -49,8 +49,18 @@ cat ~/.ssh/id_rsa.pub
 
 
 
+经常遇到的报错：
 
+- main和master分不清。建议git branch查一下，远程一般默认是main，本地本来默认master现在改成main了(git config --global init.defaultBranch main)。不同名就改一下。远程点按钮改名，本地：git branch -m <old-branch-name> <new-branch-name>
+
+- fatal: You have not concluded your merge (MERGE_HEAD exists).
+  Please, commit your changes before you merge.没有完成提交。
+  1. git commit -m "update"
+
+- 没有拉取最新远程仓库。
+  1. git fetch origin
+  2. git merge origin/master
 
 
 Created On : 2023-03-31
-Last Modified : 2023-03-31
+Last Modified : 2023-04-07
