@@ -100,8 +100,6 @@ git remote
 
 > origin
 
-
-
 显示了当前本地repo有main分支且处于main分支上。
 
 默认应该是master的，用以下命令设置默认创建的分支为main：
@@ -109,6 +107,13 @@ git remote
 ``` 
 $ git config --global init.defaultBranch main
 ```
+
+如果main和master搞混了，可能报以下错：
+
+> error: src refspec main does not match any
+> error: failed to push some refs to 'github.com:tju2050633/BlogIsAllYouNeed.git'
+
+这时要`git branch`查看branch名字。
 
 与之关联的远程仓库的代指默认名称origin，有默认的remote是因为本地repo是clone下来的。之后的将本地目录新建为repo会展示怎么手动操作remote。
 
