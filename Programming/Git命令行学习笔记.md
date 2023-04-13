@@ -145,9 +145,129 @@
 # 高级篇
 
 1. 分离HEAD
+
+   「HEAD」 是一个对当前所在分支的符号引用。「HEAD」总是指向当前分支上最近一次提交记录。
+
+   
+
+   「HEAD」 通常情况下是指向分支名的（如 bugFix）。在你提交时，改变了 bugFix 的状态，这一变化通过 「HEAD」 变得可见。
+
+   
+
+   「分离的 HEAD」 就是让其指向了某个具体的提交记录而不是分支名。
+
+   
+
+   注：图中C1、C2等是提交记录的哈希值，现实中不会这么简洁地呈现。但`git checkout <hash_code>`命令确实有用。
+
+   
+
+   ![](../img/git/advanced-head-1.png)
+
+   
+
+   我的理解：HEAD是Git中一个重要的指针，它可以指向分支名（而分支名指向一个提交记录），也可以指向提交记录。通常图中的\*号就表示当前HEAD所指的分支名，没有\*号则HEAD必然指向某个提交记录。也可以理解成：HEAD是隐藏分支名，如果不分离，则与另一个分支名重合。
+
+   
+
+   通关记录：（初始状态：当前所在分支为bugFix（后面有*号），HEAD没有显示出来）
+
+   
+
+   ![](../img/git/advanced-head-2.png)
+
+   
+
 2. 相对引用（^）
+
+   如上一节所说，C1、C2等是提交记录的「哈希值」，现实中的「哈希值」可能是：
+
+   `fed2da64c0efc5293610bdd892f82a58e8cbc5d8`
+
+   
+
+   提交记录的「哈希值」可以使用`git log`命令查看。
+
+   
+
+   但是，Git 对哈希值的处理很智能。只需要提供能够唯一标识提交记录的前几个字符即可。如`fed2`即可识别上面的哈希值。
+
+   
+
+   使用「哈希值」指定提交记录很不方便。因此使用相对引用：
+
+   - 使用 `^` 向上移动 1 个提交记录
+   - 使用 `~<num>` 向上移动多个提交记录，如 `~3`
+
+   将上面的符号加在「引用名称」的后面，来寻找提交记录的祖先节点。
+
+   
+
+   ![](../img/git/advanced-relative-reference1-1.png)
+
+   
+
+   ![](../img/git/advanced-relative-reference1-2.png)
+
+   
+
+   通关记录：（初始状态：*号在main后面，HEAD没有显示）
+
+   
+
+   ![](../img/git/advanced-relative-reference1-3.png)
+
+   
+
+   
+
 3. 相对引用2（~）
+
+   - 如上一节所说，使用 `~<num>` 可以向上移动多个提交记录。
+
+   ![](../img/git/advanced-relative-reference2-1.png)
+
+   - 强制修改分支位置：直接使用 `-f` 选项让分支（而不必是HEAD）指向另一个提交。（下图中，初始时main指向C4）
+
+   ![](../img/git/advanced-relative-reference2-2.png)
+
+   
+
+   通关记录：（初始状态：main指向C4，bugFix指向C5，HEAD指向C2）
+
+   
+
+   依次使用「强制修改分支位置」移动main和bugFix、使用「~相对引用」移动HEAD
+
+   
+
+   ![](../img/git/advanced-relative-reference2-3.png)
+
+   
+
 4. 撤销变更
+
+   - 使用`git reset`命令向上移动分支，实现「改写历史」。
+
+   ![](../img/git/advanced-undo-1.png)
+
+   - 使用`git revert`命令将撤销后指向的提交记录生成新的提交记录，添加在当前分支上。这样可以将「撤销更改」推送到远程仓库。
+
+   ![](../img/git/advanced-undo-2.png)
+
+   
+
+   通关记录：（初始状态：local*指向C3，pushed指向C2）
+
+   
+
+   依次使用`git reset`撤销「HEAD所指」的local分支，使之指向C1；使用`git checkout`将HEAD指向pushed分支；使用`git revert`撤销pushed分支，生成与C1内容相同的C2'提交记录。（注意，revert前先分离HEAD至pushed，才能在C2下面生成新提交记录）
+
+   
+
+   ![](../img/git/advanced-undo-3.png)
+
+   
 
 # 移动提交记录
 
