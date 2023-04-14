@@ -272,7 +272,68 @@
 # 移动提交记录
 
 1. Git Cherry-pick
+
+   本节内容讲如何「整理提交记录」，即操控之前那些节点。
+
+   
+
+   `git cherry-pick <提交号>...`命令将一些提交「复制」到当前所在位置「HEAD」的下面。
+
+   
+
+   下图初始状态：C2'和C4'都没有，main*指向C5。
+
+   
+
+   ![](../img/git/move-commit-cherry-pick-1.png)
+
+   
+
+   对比`git rebase <branch_name>`命令，rebase是将当前所在位置复制一份，并加到到目标分支下面，且当前所在位置移动过去了。而`git cherry-pick`仅仅复制了「提交记录」到当前所在位置的下面，并移动了HEAD到最新提交记录。
+
+   
+
+   通关记录：（初始状态：main*指向C1，C3'、C4'、C7'不存在）
+
+   
+
+   用`git cherry-pick`将3个提交记录复制添加到main*下面即可。注意该命令后可跟多个提交记录，会依次按顺序添加。
+
+   
+
+   ![](../img/git/move-commit-cherry-pick-2.png)
+
+   
+
 2. 交互式rebase
+
+   `git cherry-pick`虽然好用，但如果不知道提交记录的哈希值，就不那么方便了。因此需要使用交互式rebase从一系列的提交记录中找到想要的记录。
+
+   
+
+   交互式rebase即使用带参数 `--interactive` 的 rebase 命令, 简写为 `-i`。Git 会打开一个 UI 界面（一般是Vim）并列出将要被复制到目标分支的备选提交记录，它还会显示每个提交记录的哈希值和提交说明。
+
+   
+
+   下图初始状态：main*指向C5，右边这一列带'的提交记录都不存在。在课程给出的面板中可以调整C2\~C5节点的顺序、是否加入，最后会按照该顺序rebase到HEAD\~4即C1下面。
+
+   
+
+   ![](../img/git/move-commit-interactive-rebase-1.png)
+
+   
+
+   通关记录：（初始状态：和上面的初始状态一样。）
+
+   
+
+   使用`git rebase -i HEAD~4`进入交互式rebase界面，并指定rebase的目标节点为C1。然后根据要求调整节点数量和顺序为C3、C5、C4即可。
+
+   
+
+   ![](../img/git/move-commit-interactive-rebase-2.png)
+
+   
 
 # 杂项
 
