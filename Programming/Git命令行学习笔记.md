@@ -50,7 +50,7 @@
 
    
 
-   使用`git branch branch_name`创建新分支，但默认还在原来main分支上，此时commit会使main分支前进，新分支待在原地。
+   使用`git branch branch_name`创建新分支，但默认HEAD还在原来main分支上，此时commit会使main分支前进，新分支待在原地。
 
    
 
@@ -124,6 +124,10 @@
 
    
 
+   如果有多个分支，则创建新提交记录接在下面；如果分支已经是最新版本，则是将分支指向目标提交记录。
+
+   
+
    ![](../img/git/base-rebase-1.png)
 
    
@@ -137,9 +141,9 @@
    通关记录：（初始状态：C0，C1（main*））
 
    
-
+   
    ![](../img/git/base-rebase-3.png)
-
+   
    
 
 # 高级篇
@@ -334,14 +338,152 @@
    ![](../img/git/move-commit-interactive-rebase-2.png)
 
    
+   
+   
 
 # 杂项
 
 1. 只取一个提交记录
+
+   通关记录：（初始状态：C1 main，C2 debug，C3 printf， C4 bugFix\*，本关只检查main\*的位置）
+
+   
+
+   法1:HEAD转移到main上，再用cherry-pick把bugFix复制到main*下。
+
+   
+
+   ![](../img/git/others-fetch-one-commit-1.png)
+
+   
+
+   法2:交互式rebase将bugFix到main的C2~C4三个提交记录指定只保留C4，并接在main下面，再用rebase将main移动到bugFix并指定为HEAD所在处。
+
+   
+
+   ![](../img/git/others-fetch-one-commit-2.png)
+
+   
+
 2. 提交的技巧 #1
+
+   本节解决一种情况：希望在某个分支的旧版本上作修改，如有C1-C2-C3，希望修改C2，又要保留C3的修改。
+
+   
+
+   方法：`git rebase -i`重新排序提交记录，把希望修改的提交记录放在最前面用`git commit --amend`修改（这样新的提交记录是平行的，而不是在下面新添加），再用`git rebase -i`排序回来，最后把main分支移动到最新版本。
+
+   
+
+   通关记录：（初始状态：C1 main，C2 newImage，C3 caption，本关只检查main\*的位置）
+
+   
+
+   思路：
+
+   首先`git rebase -i HEAD~2`，交换C2、C3位置，作为新提交记录添加在C1下面，此时caption*指向C2'；
+
+   然后`git commit --amend`平行增加新提交记录C2''；再`git rebase -i HEAD~2`交换回C2、C3位置；
+
+   接着`git checkout main`+`git rebase caption`把main分支前进到最新版本。
+
+   
+
+   ![](../img/git/others-commit-tricks-1.png)
+
+   
+
 3. 提交的技巧 #2
+
+   还是上面一节的问题，这次用cherry-pick解决。
+
+   
+
+   通关记录：（初始状态：C1 main，C2 newImage，C3 caption）
+
+   
+
+   思路：
+
+   先把HEAD移动到main上；
+
+   然后`git cherry-pick C2`取出非最新版的提交记录C2，接在main*下面；
+
+   接着`git commit --amend`修改C2'并与其平行放置；
+
+   最后`git cherry-pick C2`取回C2后面的修改C3 caption，接在修改完毕的C2''下面。
+
+   
+
+   ![](../img/git/others-commit-tricks-2.png)
+
+   
+
 4. Git Tag
+
+   Git的tag可以永久地将某个特定的提交命名为里程碑，然后就可以像分支一样引用了。
+
+   
+
+   它们并不会随着新的提交而移动。你也不能切换到某个标签上面进行修改提交，它就像是提交树上的一个锚点，标识了某个特定的位置。
+
+   
+
+   具体用法：`git tag v1 C1`，将标签v1贴在提交记录C1上，如果不指定提交记录，则使用HEAD所指向的位置。
+
+   
+
+   通关记录：（初始状态：节点无变化，各个分支指向为：C3 side，C5 main*）
+
+   
+
+   按照目标增添2个tag、分离HEAD到v1所在提交记录即可。
+
+   
+
+   ![](../img/git/others-git-tag.png)
+
+   
+
 5. Git Describe
+
+   Git Describe 能帮你在提交历史中移动了多次以后找到方向。
+
+   
+
+   用法：`git describe <ref>`，ref是任何提交记录的引用（哈希值、分支名、tag），不指定则默认为HEAD所在位置。
+
+   
+
+   输出：	`<tag>_<numCommits>_g<hash>`，tag是离ref最近的标签，numCommits是ref和tag相差多少个提交记录，hash表示ref的哈希值的前几位。如果ref上有标签，则只输出标签。
+
+   
+
+   ![](../img/git/others-git-describe-1.png)
+
+   
+
+   通关记录：本关是体验关，只要在bugFix上commit一下即可过。
+
+   
+
+   4条语句分别测试了：
+
+   默认describe的是HEAD所在提交记录；
+
+   指定提交记录的哈希值；
+
+   指定提交记录的tag；
+
+   指定提交记录的分支名称；
+
+   指定的提交记录如果有tag，输出tag；
+
+   指定的提交记录没有tag，输出`<tag>_<numCommits>_g<hash>`。
+
+   
+
+   ![](../img/git/others-git-describe-2.png)
 
 # 高级话题
 
