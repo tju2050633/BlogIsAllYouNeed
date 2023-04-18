@@ -542,12 +542,91 @@
 # Push & Pull —— Git远程仓库
 
 1. Git Clone
+
+   `git clone`命令将远程服务器上的仓库「克隆」到本地。通常命令后面需要指定远程仓库的SSH、HTTPS或GitHub CLI（见GitHub仓库上的Code按钮）。
+
+   
+
+   本课程中`git clone`命令则是将本地仓库「克隆」到远程，这跟现实相反，但其实意思差不多。
+
+   
+
+   ![](../img/git/git-remote-repo-git-clone.png)
+
+   
+
 2. 远程分支
+
+   `git clone`命令让本地仓库多了一个名为`o/main`的「远程分支」。远程分支反映了远程仓库(在你上次和它通信时)的**状态**。
+
+   
+
+   「远程分支」的命名规范：`<remote name>/<branch name>`。因此名为`o/main`的「远程分支」的含义是远程仓库`o`上的分支`main`。（一般将远程仓库命名为`origin`，这里为了简洁使用`o`）
+
+   
+
+   切换到远程分支时，自动进入分离 HEAD 状态。因为你不能直接在这些分支上进行操作，要在别的地方完成工作，再用远程分享工作成果。
+
+   
+
+   下面的例子说明了上面“切换到远程分支时，自动进入分离 HEAD 状态”和“不能直接在这些分支上进行操作”。
+
+   ![](../img/git/git-remote-repo-remote-branch-1.png)
+
+   
+
+   通关记录：（初始状态：C1 o/main，C3 main*，右边远程仓库一样）
+
+   
+
+   ![](../img/git/git-remote-repo-remote-branch-2.png)
+
+   
+
 3. Git Fetch
+
+   `git fetch`命令从远程仓库获取数据，同时远程分支（`o/main`）也会更新，以同步最新的远程仓库。总结来说`git fetch`：
+
+   - 从远程仓库下载本地仓库中缺失的提交记录
+   - 更新远程分支指针(如 `o/main`)到远程仓库相应分支的最新状态
+   - 仅仅下载了数据，不会修改磁盘上的文件
+
+   
+
+   ![](../img/git/git-remote-repo-git-fetch-1.png)
+
+   
+
+   通关记录：一次fetch即可，下载所有缺失的数据，并更新远程分支。
+
+   
+
+   ![](../img/git/git-remote-repo-git-fetch-2.png)
+
+   
+
 4. Git Pull
+
+   ​	`git fetch`只获取了远程数据，现在要将这些改变更新到本地仓库。如，`git fetch`更新了远程分支后，我们像合并本地分支一样合并远程分支，即使用下面的命令：
+
+   - `git cherry-pick o/main`
+   - `git rebase o/main`
+   - `git merge o/main`
+
+   `git pull`命令允许我们先抓取更新，再合并到本地分支。即`git pull` = `git fetch;git merge o/main`。
+
+   
+
+   ![](../img/git/git-remote-repo-git-pull.png)
+
+   
+
 5. 模拟团队合作
+
 6. Git Push
+
 7. 偏离的提交历史
+
 8. 锁定的Main（Locked Main）
 
 # 关于Origin和它的周边——Git远程仓库高级操作
