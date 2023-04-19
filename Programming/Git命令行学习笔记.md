@@ -623,11 +623,105 @@
 
 5. 模拟团队合作
 
+   这节课程给出了一种不存在的命令`git fakeTeamwork`，用来模拟团队协作。这条命令可以让远程仓库的指定分支提交指定次数。
+
+   
+
+   ![](../img/git/git-remote-repo-teamwork-1.png)
+
+   
+
+   通关记录：（初始状态：C0，C1 main*）
+
+   
+
+   注意要先`git commit`再`git pull`。如果先pull，o/main分支先更新到C3，而`git pull`是包含了`git merge o/main`的，即此时main*会跟随o/main指向C3。
+
+   
+
+   ![](../img/git/git-remote-repo-teamwork-2.png)
+
+   
+
 6. Git Push
+
+   `git push` 负责将**你的**变更「上传」到指定的远程仓库，并在远程仓库上合并你的新提交记录。
+
+   
+
+   下面的例子中，初始状态为C1 o/main，C2 main\*，远程仓库C1 main，没有C2。即两边仓库的main分支状态是一样的，这可能是因为刚clone，还没有更新。但本地仓库已经更新到了C2 main\*，需要将远程仓库同步更新到C2，`git push`命令同时更新了o/main和main两个分支（和`git pull`一样）。
+
+   
+
+   ![](../img/git/git-remote-repo-git-push-1.png)
+
+   
+
+   通关记录：（初始状态：C0，C1 main*，o/main；远程仓库，C0，C1 main）
+
+   
+
+   ![](../img/git/git-remote-repo-git-push-2.png)
+
+   
 
 7. 偏离的提交历史
 
+   先介绍提交历史的「偏离」（diverge）。你克隆了一个仓库并花费数日进行开发，但这数日内远程仓库被同事修改（重要的是改了API），导致你的工作变成基于旧版本的，与远程仓库的最新版代码不匹配。
+
+   
+
+   此时不能用`git push`命令变更，Git强制你先合并远程最新代码，再分享你的工作（回想每次push都要先pull并解决冲突）。
+
+   
+
+   下面例子中，初始状态为：C0，C1 o/main，C3 main*；远程仓库，C0，C1，C2 main。此时直接`git push`是没用的，因此远程仓库最新版和本地仓库不匹配。
+
+   
+
+   因此，需要先抓取远程仓库的新内容C2，再将本地分支rebase到C2下面（这一步需要解决冲突，也可以使用`git merge o/main`创建新的合并提交，反正需要先合并远程仓库的变更）成为C3'，再`git push`到远程仓库。
+
+   
+
+   ![](../img/git/git-remote-repo-diverge-1.png)
+
+   
+
+   前面已经介绍过 `git pull` 就是 fetch 和 merge 的简写，类似的 `git pull --rebase` 就是 fetch 和 rebase 的简写！上面的例子中命令可以简化为`git pull --rebase; git push`。如果用merge合并，则是`git pull; git push`。这也是最常用最简单的方式。
+
+   
+
+   通关记录：（初始状态：C0，C1 main*）
+
+   
+
+   ![](../img/git/git-remote-repo-diverge-2.png)
+
+   
+
 8. 锁定的Main（Locked Main）
+
+   大的团队合作中，main可能被锁定，需要pull request来合并修改。如果直接commit到本地main，然后尝试push，会报错：
+
+   
+
+   >! [远程服务器拒绝] main -> main (TF402455: 不允许推送(push)这个分支; 你必须使用pull request来更新这个分支.)
+
+   
+
+   远程服务器拒绝直接push提交到main，是因为策略配置要求pull requests来提交更新（这样可以保护main分支不被太多开发者弄乱，例如Linux，不可能全球开发者都push到main上）
+
+   
+
+   通关记录：（初始状态：C0，C1 o/main，C2 main*；远程仓库，C0，C1 main）
+
+   
+
+   `git reset`可以不需要-- hard参数，该命令将main*指向了o/main。接着`git checkout -b feature C2`创建新分支feature并指向C2，且HEAD指向feature分支。接着就可以用`git push origin feature`（origin是远程仓库名字，feature是要推送分支名）将feature分支push到远程仓库了，而不需要影响远程仓库的main分支。
+
+   
+
+   ![](../img/git/git-remote-repo-locked-main.png)
 
 # 关于Origin和它的周边——Git远程仓库高级操作
 
@@ -647,4 +741,4 @@
 
 
 Created On : 2023-04-12
-Last Modified : 2023-04-17
+Last Modified : 2023-04-19
