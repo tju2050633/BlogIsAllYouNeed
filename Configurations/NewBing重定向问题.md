@@ -8,11 +8,11 @@
 
 #### 1.1 Header Editor
 
-![](../img/Headereditor插件设置.png)
+![](../img/Configurations/Headereditor插件设置.png)
 
 #### 1.1 Mod Header
 
-![](../img/ModHeader插件设置.png)
+![](../img/Configurations/ModHeader插件设置.png)
 
 
 ### 2.清除浏览器缓存

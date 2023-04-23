@@ -3,7 +3,7 @@
 
 **错误提示**：
 
-![](../img/CUDA显存不足.png)
+![](../img/Research/CUDA显存不足.png)
 
 ---
 
