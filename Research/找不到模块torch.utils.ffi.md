@@ -3,7 +3,8 @@
 
 **错误提示**：
 
-![](../img/Research/找不到模块torch.utils.ffi.png)
+![](img/找不到模块torch.utils.ffi.png)
+![](img/找不到模块torch.utils.ffi-2.png)
 
 ---
 

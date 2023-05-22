@@ -4,7 +4,7 @@
 
 **错误提示**：
 
-![](../img/Research/Attention机制通道数不匹配.png)
+![](img/Attention机制通道数不匹配.png)
 
 ---
 
