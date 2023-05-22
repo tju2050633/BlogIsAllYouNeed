@@ -28,7 +28,7 @@
 
    
 
-   ![](../img/git/base-commit.png)
+   ![](img/base-commit.png)
 
    
 
@@ -66,7 +66,7 @@
 
    
 
-   ![](../img/git/base-branch.png)
+   ![](img/base-branch.png)
 
    
 
@@ -84,7 +84,7 @@
 
    
 
-   ![](../img/git/base-merge-1.png)
+   ![](img/base-merge-1.png)
 
    
 
@@ -92,7 +92,7 @@
 
    
 
-   ![](../img/git/base-merge-2.png)
+   ![](img/base-merge-2.png)
 
    
 
@@ -100,7 +100,7 @@
 
    
 
-   ![](../img/git/base-merge-3.png)
+   ![](img/base-merge-3.png)
 
    
 
@@ -128,7 +128,7 @@
 
    
 
-   ![](../img/git/base-rebase-1.png)
+   ![](img/base-rebase-1.png)
 
    
 
@@ -136,13 +136,13 @@
 
    
 
-   ![](../img/git/base-rebase-2.png)
+   ![](img/base-rebase-2.png)
 
    通关记录：（初始状态：C0，C1（main*））
 
    
    
-   ![](../img/git/base-rebase-3.png)
+   ![](img/base-rebase-3.png)
    
    
 
@@ -166,7 +166,7 @@
 
    
 
-   ![](../img/git/advanced-head-1.png)
+   ![](img/advanced-head-1.png)
 
    
 
@@ -178,7 +178,7 @@
 
    
 
-   ![](../img/git/advanced-head-2.png)
+   ![](img/advanced-head-2.png)
 
    
 
@@ -207,11 +207,11 @@
 
    
 
-   ![](../img/git/advanced-relative-reference1-1.png)
+   ![](img/advanced-relative-reference1-1.png)
 
    
 
-   ![](../img/git/advanced-relative-reference1-2.png)
+   ![](img/advanced-relative-reference1-2.png)
 
    
 
@@ -219,7 +219,7 @@
 
    
 
-   ![](../img/git/advanced-relative-reference1-3.png)
+   ![](img/advanced-relative-reference1-3.png)
 
    
 
@@ -229,11 +229,11 @@
 
    - 如上一节所说，使用 `~<num>` 可以向上移动多个提交记录。
 
-   ![](../img/git/advanced-relative-reference2-1.png)
+   ![](img/advanced-relative-reference2-1.png)
 
    - 强制修改分支位置：直接使用 `-f` 选项让分支（而不必是HEAD）指向另一个提交。（下图中，初始时main指向C4）
 
-   ![](../img/git/advanced-relative-reference2-2.png)
+   ![](img/advanced-relative-reference2-2.png)
 
    
 
@@ -245,7 +245,7 @@
 
    
 
-   ![](../img/git/advanced-relative-reference2-3.png)
+   ![](img/advanced-relative-reference2-3.png)
 
    
 
@@ -253,11 +253,11 @@
 
    - 使用`git reset`命令向上移动分支，实现「改写历史」。
 
-   ![](../img/git/advanced-undo-1.png)
+   ![](img/advanced-undo-1.png)
 
    - 使用`git revert`命令将撤销后指向的提交记录生成新的提交记录，添加在当前分支上。这样可以将「撤销更改」推送到远程仓库。
 
-   ![](../img/git/advanced-undo-2.png)
+   ![](img/advanced-undo-2.png)
 
    
 
@@ -269,7 +269,7 @@
 
    
 
-   ![](../img/git/advanced-undo-3.png)
+   ![](img/advanced-undo-3.png)
 
    
 
@@ -289,7 +289,7 @@
 
    
 
-   ![](../img/git/move-commit-cherry-pick-1.png)
+   ![](img/move-commit-cherry-pick-1.png)
 
    
 
@@ -305,7 +305,7 @@
 
    
 
-   ![](../img/git/move-commit-cherry-pick-2.png)
+   ![](img/move-commit-cherry-pick-2.png)
 
    
 
@@ -323,7 +323,7 @@
 
    
 
-   ![](../img/git/move-commit-interactive-rebase-1.png)
+   ![](img/move-commit-interactive-rebase-1.png)
 
    
 
@@ -335,7 +335,7 @@
 
    
 
-   ![](../img/git/move-commit-interactive-rebase-2.png)
+   ![](img/move-commit-interactive-rebase-2.png)
 
    
    
@@ -353,7 +353,7 @@
 
    
 
-   ![](../img/git/others-fetch-one-commit-1.png)
+   ![](img/others-fetch-one-commit-1.png)
 
    
 
@@ -361,7 +361,7 @@
 
    
 
-   ![](../img/git/others-fetch-one-commit-2.png)
+   ![](img/others-fetch-one-commit-2.png)
 
    
 
@@ -389,7 +389,7 @@
 
    
 
-   ![](../img/git/others-commit-tricks-1.png)
+   ![](img/others-commit-tricks-1.png)
 
    
 
@@ -415,7 +415,7 @@
 
    
 
-   ![](../img/git/others-commit-tricks-2.png)
+   ![](img/others-commit-tricks-2.png)
 
    
 
@@ -441,7 +441,7 @@
 
    
 
-   ![](../img/git/others-git-tag.png)
+   ![](img/others-git-tag.png)
 
    
 
@@ -459,7 +459,7 @@
 
    
 
-   ![](../img/git/others-git-describe-1.png)
+   ![](img/others-git-describe-1.png)
 
    
 
@@ -483,7 +483,7 @@
 
    
 
-   ![](../img/git/others-git-describe-2.png)
+   ![](img/others-git-describe-2.png)
 
 # 高级话题
 
@@ -501,7 +501,7 @@
 
    
 
-   ![](../img/git/advanced-topics-multiple-rebase-1.png)
+   ![](img/advanced-topics-multiple-rebase-1.png)
 
    
 
@@ -519,7 +519,7 @@
 
    
 
-   ![](../img/git/advanced-topics-two-parent-1.png)
+   ![](img/advanced-topics-two-parent-1.png)
 
    
 
@@ -527,7 +527,7 @@
 
    
 
-   ![](../img/git/advanced-topics-two-parent-2.png)
+   ![](img/advanced-topics-two-parent-2.png)
 
    
 
@@ -537,7 +537,7 @@
 
    
 
-   ![](../img/git/advanced-topics-tangling-branch.png)
+   ![](img/advanced-topics-tangling-branch.png)
 
 # Push & Pull —— Git远程仓库
 
@@ -551,7 +551,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-clone.png)
+   ![](img/git-remote-repo-git-clone.png)
 
    
 
@@ -571,7 +571,7 @@
 
    下面的例子说明了上面“切换到远程分支时，自动进入分离 HEAD 状态”和“不能直接在这些分支上进行操作”。
 
-   ![](../img/git/git-remote-repo-remote-branch-1.png)
+   ![](img/git-remote-repo-remote-branch-1.png)
 
    
 
@@ -579,7 +579,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-remote-branch-2.png)
+   ![](img/git-remote-repo-remote-branch-2.png)
 
    
 
@@ -593,7 +593,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-fetch-1.png)
+   ![](img/git-remote-repo-git-fetch-1.png)
 
    
 
@@ -601,7 +601,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-fetch-2.png)
+   ![](img/git-remote-repo-git-fetch-2.png)
 
    
 
@@ -617,7 +617,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-pull.png)
+   ![](img/git-remote-repo-git-pull.png)
 
    
 
@@ -627,7 +627,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-teamwork-1.png)
+   ![](img/git-remote-repo-teamwork-1.png)
 
    
 
@@ -639,7 +639,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-teamwork-2.png)
+   ![](img/git-remote-repo-teamwork-2.png)
 
    
 
@@ -653,7 +653,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-push-1.png)
+   ![](img/git-remote-repo-git-push-1.png)
 
    
 
@@ -661,7 +661,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-git-push-2.png)
+   ![](img/git-remote-repo-git-push-2.png)
 
    
 
@@ -683,7 +683,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-diverge-1.png)
+   ![](img/git-remote-repo-diverge-1.png)
 
    
 
@@ -695,7 +695,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-diverge-2.png)
+   ![](img/git-remote-repo-diverge-2.png)
 
    
 
@@ -721,7 +721,7 @@
 
    
 
-   ![](../img/git/git-remote-repo-locked-main.png)
+   ![](img/git-remote-repo-locked-main.png)
 
 # 关于Origin和它的周边——Git远程仓库高级操作
 
@@ -751,7 +751,7 @@
 
    
 
-   ![](../img/git/origin-push-main-1.png)
+   ![](img/origin-push-main-1.png)
 
    
 
@@ -759,7 +759,7 @@
 
    
 
-   ![](../img/git/origin-push-main-2.png)
+   ![](img/origin-push-main-2.png)
 
    
 
