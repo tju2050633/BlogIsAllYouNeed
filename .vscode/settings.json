@@ -4,6 +4,10 @@
         "*.wxss": "css",
         "*.wxs": "javascript",
         "iostream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "new": "cpp",
+        "string": "cpp",
+        "map": "cpp",
+        "iosfwd": "cpp"
     }
 }

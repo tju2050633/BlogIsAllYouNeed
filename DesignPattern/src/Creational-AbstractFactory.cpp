@@ -1,115 +1,149 @@
 #include <iostream>
 using namespace std;
 
-// 产品A
+/*
+有两种产品：ProductA 和 ProductB，它们没有共同的接口，是两种完全不同的产品
+每种产品有两种实现：ProductA1 和 ProductA2，ProductB1 和 ProductB2（就像两个品牌）
+有两种工厂：Factory1 和 Factory2（就像两个品牌的工厂）
+工厂实现相同的接口 Factory，Factory可以生产两种产品A和B
+工厂1生产产品A1和B1，工厂2生产产品A2和B2
+*/
 
+/* 声明 */
+class ProductA;
+class ProductA1;
+class ProductA2;
+class ProductB;
+class ProductB1;
+class ProductB2;
+class Factory;
+class Factory1;
+class Factory2;
+
+/* 定义 */
+
+// 产品A
 class ProductA
 {
 public:
+    virtual ~ProductA() {}
     virtual void use() = 0; // 抽象类
 };
 
-class ConcreteProductA1 : public ProductA
+class ProductA1 : public ProductA
 {
 public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductA1::use()" << endl;
-    }
+    void use();
 };
 
-class ConcreteProductA2 : public ProductA
+class ProductA2 : public ProductA
 {
 public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductA2::use()" << endl;
-    }
+    void use();
 };
 
 // 产品B
-
 class ProductB
 {
 public:
+    virtual ~ProductB() {}
     virtual void use() = 0; // 抽象类
 };
 
-class ConcreteProductB1 : public ProductB
+class ProductB1 : public ProductB
 {
 public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductB1::use()" << endl;
-    }
+    void use();
 };
 
-class ConcreteProductB2 : public ProductB
+class ProductB2 : public ProductB
 {
 public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductB2::use()" << endl;
-    }
+    void use();
 };
 
 // 工厂
-
 class Factory
 {
 public:
-    // 返回抽象产品指针
+    virtual ~Factory() {}
     virtual ProductA *createProductA() = 0; // 抽象类
     virtual ProductB *createProductB() = 0; // 抽象类
 };
 
-class ConcreteFactory1 : public Factory
+class Factory1 : public Factory
 {
 public:
-    ConcreteProductA1 *createProductA()
-    {
-        cout << "ConcreteFactoryA1::createProduct()" << endl;
-        return new ConcreteProductA1();
-    }
-
-    ConcreteProductB1 *createProductB()
-    {
-        cout << "ConcreteFactoryB1::createProduct()" << endl;
-        return new ConcreteProductB1();
-    }
+    ProductA1 *createProductA();
+    ProductB1 *createProductB();
 };
 
-class ConcreteFactory2 : public Factory
+class Factory2 : public Factory
 {
 public:
-    ConcreteProductA2 *createProductA()
-    {
-        cout << "ConcreteFactoryA2::createProduct()" << endl;
-        return new ConcreteProductA2();
-    }
-
-    ConcreteProductB2 *createProductB()
-    {
-        cout << "ConcreteFactoryB2::createProduct()" << endl;
-        return new ConcreteProductB2();
-    }
+    ProductA2 *createProductA();
+    ProductB2 *createProductB();
 };
+
+/* 实现 */
+
+// 产品A
+
+void ProductA1::use()
+{
+    cout << "ProductA1::use()" << endl;
+}
+
+void ProductA2::use()
+{
+    cout << "ProductA2::use()" << endl;
+}
+
+// 产品B
+
+void ProductB1::use()
+{
+    cout << "ProductB1::use()" << endl;
+}
+
+void ProductB2::use()
+{
+    cout << "ProductB2::use()" << endl;
+}
+
+// 工厂
+
+ProductA1 *Factory1::createProductA()
+{
+    return new ProductA1();
+}
+
+ProductB1 *Factory1::createProductB()
+{
+    return new ProductB1();
+}
+
+ProductA2 *Factory2::createProductA()
+{
+    return new ProductA2();
+}
+
+ProductB2 *Factory2::createProductB()
+{
+    return new ProductB2();
+}
 
 // 客户端
 
 int main()
 {
-    Factory *factory1 = new ConcreteFactory1();
+    Factory *factory1 = new Factory1();
     ProductA *productA1 = factory1->createProductA();
     ProductB *productB1 = factory1->createProductB();
     productA1->use();
     productB1->use();
 
-    Factory *factory2 = new ConcreteFactory2();
+    Factory *factory2 = new Factory2();
     ProductA *productA2 = factory2->createProductA();
     ProductB *productB2 = factory2->createProductB();
     productA2->use();

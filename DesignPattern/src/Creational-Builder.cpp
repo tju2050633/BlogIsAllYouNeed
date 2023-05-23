@@ -6,7 +6,15 @@ using namespace std;
 
 */
 
-// 产品
+/* 声明 */
+
+class Product;
+class Builder;
+class ConcreteBuilder;
+class Director;
+
+/* 定义 */
+
 class Product
 {
 private:
@@ -15,110 +23,117 @@ private:
     string partC;
 
 public:
-    void setPartA(string partA)
-    {
-        this->partA = partA;
-    }
-
-    void setPartB(string partB)
-    {
-        this->partB = partB;
-    }
-
-    void setPartC(string partC)
-    {
-        this->partC = partC;
-    }
-
-    void use()
-    {
-        cout << "Product::use()" << endl;
-        cout << "partA: " << partA << endl;
-        cout << "partB: " << partB << endl;
-        cout << "partC: " << partC << endl;
-    }
+    void setPartA(string partA);
+    void setPartB(string partB);
+    void setPartC(string partC);
+    void use();
 };
 
-// 建造者
 class Builder
 {
 public:
-    virtual ~Builder()
-    {
-    }
-
+    virtual ~Builder() {}
     virtual void buildPartA() = 0;
     virtual void buildPartB() = 0;
     virtual void buildPartC() = 0;
-
     virtual Product *getProduct() = 0;
 };
 
-// 具体建造者
 class ConcreteBuilder : public Builder
 {
 private:
     Product *product;
 
 public:
-    ConcreteBuilder()
-    {
-        product = new Product();
-    }
-
-    void buildPartA()
-    {
-        cout << "ConcreteBuilder::buildPartA()" << endl;
-        product->setPartA("partA");
-    }
-
-    void buildPartB()
-    {
-        cout << "ConcreteBuilder::buildPartB()" << endl;
-        product->setPartB("partB");
-    }
-
-    void buildPartC()
-    {
-        cout << "ConcreteBuilder::buildPartC()" << endl;
-        product->setPartC("partC");
-    }
-
-    Product *getProduct()
-    {
-        return product;
-    }
+    ConcreteBuilder();
+    void buildPartA();
+    void buildPartB();
+    void buildPartC();
+    Product *getProduct();
 };
 
-// 指挥者
 class Director
 {
 private:
     Builder *builder;
 
 public:
-    Product *construct()
-    {
-        builder->buildPartA();
-        builder->buildPartB();
-        builder->buildPartC();
-
-        return builder->getProduct();
-    }
-
-    void setBuilder(Builder *builder)
-    {
-        this->builder = builder;
-    }
+    Director(Builder *builder);
+    Product *construct();
 };
+
+/* 实现 */
+
+void Product::setPartA(string partA)
+{
+    this->partA = partA;
+}
+
+void Product::setPartB(string partB)
+{
+    this->partB = partB;
+}
+
+void Product::setPartC(string partC)
+{
+    this->partC = partC;
+}
+
+void Product::use()
+{
+    cout << "Product::use()" << endl;
+    cout << "partA: " << partA << endl;
+    cout << "partB: " << partB << endl;
+    cout << "partC: " << partC << endl;
+}
+
+ConcreteBuilder::ConcreteBuilder()
+{
+    product = new Product();
+}
+
+void ConcreteBuilder::buildPartA()
+{
+    cout << "ConcreteBuilder::buildPartA()" << endl;
+    product->setPartA("partA");
+}
+
+void ConcreteBuilder::buildPartB()
+{
+    cout << "ConcreteBuilder::buildPartB()" << endl;
+    product->setPartB("partB");
+}
+
+void ConcreteBuilder::buildPartC()
+{
+    cout << "ConcreteBuilder::buildPartC()" << endl;
+    product->setPartC("partC");
+}
+
+Product *ConcreteBuilder::getProduct()
+{
+    return product;
+}
+
+Director::Director(Builder *builder)
+{
+    this->builder = builder;
+}
+
+Product *Director::construct()
+{
+    builder->buildPartA();
+    builder->buildPartB();
+    builder->buildPartC();
+    return builder->getProduct();
+}
 
 // 客户端
 
 int main()
 {
     Builder *builder = new ConcreteBuilder();
-    Director director;
-    director.setBuilder(builder);
+    Director director(builder);
 
     Product *product = director.construct();
 

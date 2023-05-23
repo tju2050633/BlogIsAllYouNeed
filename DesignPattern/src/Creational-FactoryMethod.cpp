@@ -2,41 +2,42 @@
 using namespace std;
 
 /*
-有两种产品：ConcreteProductA 和 ConcreteProductB
+有两种产品：ProductA 和 ProductB
 产品实现相同的接口 Product
-有两种工厂：ConcreteFactoryA 和 ConcreteFactoryB
+有两种工厂：FactoryA 和 FactoryB
 工厂实现相同的接口 Factory
 工厂A生产产品A，工厂B生产产品B
 
 客户端只需要知道工厂的接口，不需要知道具体的工厂和产品
 */
 
+/* 声明 */
+class Product;
+class ProductA;
+class ProductB;
+class Factory;
+class FactoryA;
+class FactoryB;
+
+/* 定义 */
+
 // 产品
 
 class Product
 {
 public:
+    virtual ~Product() {}
     virtual void use() = 0; // 抽象类
 };
 
-class ConcreteProductA : public Product
+class ProductA : public Product
 {
-public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductA::use()" << endl;
-    }
+    void use();
 };
 
-class ConcreteProductB : public Product
+class ProductB : public Product
 {
-public:
-    // 重写
-    void use()
-    {
-        cout << "ConcreteProductB::use()" << endl;
-    }
+    void use();
 };
 
 // 工厂
@@ -44,39 +45,59 @@ public:
 class Factory
 {
 public:
-    // 返回抽象产品指针
+    virtual ~Factory() {}
     virtual Product *createProduct() = 0; // 抽象类
 };
 
-class ConcreteFactoryA : public Factory
+class FactoryA : public Factory
 {
-public:
-    ConcreteProductA *createProduct()
-    {
-        cout << "ConcreteFactoryA::createProduct()" << endl;
-        return new ConcreteProductA();
-    }
+    ProductA *createProduct();
 };
 
-class ConcreteFactoryB : public Factory
+class FactoryB : public Factory
 {
-public:
-    ConcreteProductB *createProduct()
-    {
-        cout << "ConcreteFactoryB::createProduct()" << endl;
-        return new ConcreteProductB();
-    }
+    ProductB *createProduct();
 };
+
+/* 实现 */
+
+// 产品
+
+void ProductA::use()
+{
+    cout << "ProductA::use()" << endl;
+}
+
+void ProductB::use()
+{
+    cout << "ProductB::use()" << endl;
+}
+
+// 工厂
+
+ProductA *FactoryA::createProduct()
+{
+    cout << "FactoryA::createProduct()" << endl;
+    return new ProductA();
+}
+
+ProductB *FactoryB::createProduct()
+{
+    cout << "FactoryB::createProduct()" << endl;
+    return new ProductB();
+}
 
 // 客户端
 
 int main()
 {
-    Factory *factoryA = new ConcreteFactoryA();
+    // 生产A
+    Factory *factoryA = new FactoryA();
     Product *productA = factoryA->createProduct();
     productA->use();
 
-    Factory *factoryB = new ConcreteFactoryB();
+    // 生产B
+    Factory *factoryB = new FactoryB();
     Product *productB = factoryB->createProduct();
     productB->use();
 
