@@ -47,8 +47,12 @@ screen -X -S session_name quit
 
 其中session_name是你需要退出的screen会话的名称。这样可以避免screen会话中正在运行的程序被终止。
 
+退出screen快捷键：
+
+> Control + A + D
+
 
 
 
 Created On : 2023-04-01
-Last Modified : 2023-04-01
+Last Modified : 2023-05-26
