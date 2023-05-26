@@ -60,6 +60,9 @@ cat ~/.ssh/id_rsa.pub
 - 没有拉取最新远程仓库。
   1. git fetch origin
   2. git merge origin/master
+- 有超过100MB的文件被追踪，此时写进.gitignore为时已晚，既无法通过git add或git commit更新掉，又push不上GitHub
+  - 用命令：`git filter-branch --tree-filter 'rm -rf path/to/your/file' HEAD`，path/to/your/file替换成要清除的大文件的路径，即可取消git对他的追踪。
+  
 
 
 
@@ -228,4 +231,4 @@ $ git push -u origin main
 
 
 Created On : 2023-03-31
-Last Modified : 2023-04-08
+Last Modified : 2023-05-26
