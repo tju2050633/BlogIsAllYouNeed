@@ -57,10 +57,12 @@ javac -d bin -cp src src/Main.java && java -cp bin Main
 
 ### 二、maven
 
-
-
+- 设置JAVA_HOME环境变量，目前使用export命令，参考《Java版本控制.md》
+- 编译：根目录下`mvn clean package`
+- 运行：java -jar target/<jar-file-name>.jar
+- 自动修改后编译运行：mvn spring-boot:run
 
 
 
 Created On : 2023-09-22
-Last Modified : 2023-09-22
+Last Modified : 2023-09-24
