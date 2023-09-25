@@ -109,7 +109,7 @@ Java后端项目application.yaml里有配置nacos的一段：
 - cd进nacos/bin目录，运行`startup.cmd -m standalone`启动nacos，默认端口8848
 - 浏览器访问 http://localhost:8848/nacos验证启动成功，账号密码都是nacos
 - application.yaml配置中nacos改为server-addr: http://localhost:8848，可以运行后端且nacos处于本地主机
-- `nacos stop`终止nacos
+- `sh shutdown.sh`终止nacos
 
 
 
@@ -117,4 +117,4 @@ Java后端项目application.yaml里有配置nacos的一段：
 
 
 Created On : 2023-09-22
-Last Modified : 2023-09-24
+Last Modified : 2023-09-25
