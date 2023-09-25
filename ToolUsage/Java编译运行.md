@@ -57,10 +57,62 @@ javac -d bin -cp src src/Main.java && java -cp bin Main
 
 ### 二、maven
 
-- 设置JAVA_HOME环境变量，目前使用export命令，参考《Java版本控制.md》
-- 编译：根目录下`mvn clean package`
-- 运行：java -jar target/<jar-file-name>.jar
-- 自动修改后编译运行：mvn spring-boot:run
+- maven初始化项目：在项目根目录下`mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+
+> 解释:
+>
+> - `archetype:generate` 表示使用Maven Archetype插件生成项目
+> - `-DgroupId` 指定项目的组Id为com.mycompany.app
+> - `-DartifactId` 指定项目的artifactId为my-app
+> - `-DarchetypeArtifactId` 指定使用maven-archetype-quickstart archetype
+> - `-DarchetypeVersion` 指定archetype的版本为1.4
+> - `-DinteractiveMode=false` 表示不用交互式配置
+>
+> 1. 进入生成的my-app目录,会看到一个最小的Maven项目结构,包含src、pom.xml等文件
+> 2. 在my-app目录下运行:`mvn package` 可以编译项目
+> 3. `java -cp target/my-app-1.0-SNAPSHOT.jar com.mycompany.app.App` 可以运行项目
+> 4. 现在就可以开始在src/main/java下开发Java代码,并使用Maven进行编译和运行了
+
+- 后端大项目：
+
+  - 设置JAVA_HOME环境变量，目前使用export命令，参考《Java版本控制.md》
+
+  - 编译：根目录下`mvn clean package`
+
+  - 运行：java -jar target/<jar-file-name>.jar
+
+  - 自动修改后编译运行：mvn spring-boot:run
+
+
+
+### 三、Nacos Server配置相关
+
+Java后端项目application.yaml里有配置nacos的一段：
+
+> spring:
+>
+>   application:
+>
+> ​    name: DisasterSimulation
+>
+>   cloud:
+>
+> ​    nacos:
+>
+> ​      discovery:
+>
+> ​        server-addr: nacos:8848
+
+这里域名nacos应该要映射到具体IP，为了本地运行我就本地配置Nacos Server测试了。
+
+- 下载nacos：https://github.com/alibaba/nacos/releases。下的1.3.2，选tar.gz压缩包。
+- cd进nacos/bin目录，运行`startup.cmd -m standalone`启动nacos，默认端口8848
+- 浏览器访问 http://localhost:8848/nacos验证启动成功，账号密码都是nacos
+- application.yaml配置中nacos改为server-addr: http://localhost:8848，可以运行后端且nacos处于本地主机
+- `nacos stop`终止nacos
+
+
+
 
 
 
