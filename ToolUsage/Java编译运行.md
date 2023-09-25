@@ -106,7 +106,7 @@ Java后端项目application.yaml里有配置nacos的一段：
 这里域名nacos应该要映射到具体IP，为了本地运行我就本地配置Nacos Server测试了。
 
 - 下载nacos：https://github.com/alibaba/nacos/releases。下的1.3.2，选tar.gz压缩包。
-- cd进nacos/bin目录，运行`startup.cmd -m standalone`启动nacos，默认端口8848
+- cd进nacos/bin目录，运行`sh startup.sh -m standalone`启动nacos，默认端口8848
 - 浏览器访问 http://localhost:8848/nacos验证启动成功，账号密码都是nacos
 - application.yaml配置中nacos改为server-addr: http://localhost:8848，可以运行后端且nacos处于本地主机
 - `sh shutdown.sh`终止nacos
